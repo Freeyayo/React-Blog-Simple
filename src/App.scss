@@ -1,0 +1,702 @@
+@import '~antd/dist/antd.css';
+@import url(https://fonts.googleapis.com/css?family=Satisfy&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap);
+@import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah&display=swap');
+@import "~video-react/styles/scss/video-react";
+
+html {
+    --antd-wave-shadow-color: #6e6565;
+}
+
+#home{
+    position: absolute;
+    top: 13%;
+    left: 3%;
+    transform: translate(-50%, -50%);
+}
+
+@mixin modalPattern($top:60%,$height:47%){
+    position: fixed;
+    border-radius: 16px;
+    top: $top;
+    left: 50%;
+    width: 35%;
+    height: $height;
+    background: white;
+    opacity: .99;
+    transform: translate(-50%,-50%);
+    box-shadow: 10px 10px 5px #888888;
+    padding-top: 10px;
+    padding-left: 20px;
+    overflow: scroll;
+    z-index: 3;
+}
+
+@mixin toggleButton($top:13px,$right:-94px){
+    top: $top;
+    background: white;
+    border: none;
+    position: absolute;
+    right: $right;
+    width: 65px;
+    outline: none;
+    height: 33px;
+    font-size: 24px;
+    cursor: pointer;
+    border-radius: 17px;
+    border-bottom: 1px solid;
+    border-right: 1px solid;
+    line-height: 3px;
+}
+
+#editAndSendButton{
+    position: absolute;
+    font-family: "Open Sans Condensed";
+    width: 50px;
+    height: 23px;
+    top: -79px;
+    left: -17px;
+    outline: none;
+    border: none;
+    font-size: 19px;
+    cursor: pointer;
+}
+
+#editAndSendButton:hover{
+    animation: toOrange .3s 1 linear both; 
+}
+
+@keyframes toOrange{
+    from{
+        color: black;
+    }
+    to{
+        color: orange;
+    }
+}
+
+.mailbox{
+    position: fixed;
+    right: 10%;
+    top: 40%;
+    a:hover{
+        color: orange;
+    }
+    sup{
+        background-color: orange;
+        transform: translate(101%,-65%) scale(.9);
+    }
+    .subscribes{
+        width: 150px;
+        margin: 10px;
+        position: absolute;
+        left: -75px;
+        .mask{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            z-index: 2;
+        }
+        .subsitem{
+            margin-top: 10px;
+            height: 30px;
+        }
+    }
+    #modalMask{
+        @include modalPattern;  
+        .modalitem{
+            position: relative;
+            font-size: x-large;
+            margin-top: 10px;
+            .modalButton{
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+        }
+    }
+    #modalHeader{
+        position: fixed;
+        left: 50%;
+        top: 32%;
+        transform: translate(-50%,-50%);
+        font-family: "Open Sans Condensed";
+        font-size: 35px;
+        font-weight: 700;
+        background: white;
+        border-radius: 15px;
+        width: 35%;
+        text-align: center;
+        box-shadow: 10px 10px 5px #888888;
+        z-index: 4;
+        #sendButton{
+            font-size: 23px;
+            background: none;
+            outline: none;
+            border: none;
+            cursor: pointer;
+            animation: sendButtonAnimation 1s infinite linear both alternate; 
+        }
+        #sendingText{
+            @extend #sendButton;
+            animation: sendingTextAnimation .5s infinite linear both alternate;
+        }
+        #sentSuccess{
+            @extend #sendButton;
+            animation: sentSuccessAnimation .5s 1 linear both alternate; 
+        }
+        #sentFail{
+            @extend #sendButton;
+            animation: sentFailAnimation .5s 1 linear both alternate; 
+        }
+        #cancleButton{
+            @include toggleButton;
+        }
+    }
+}
+
+#modalInput{
+    @include modalPattern(37%, 6%); 
+    font-size: 24px;
+    padding-top: 0;
+}
+#confirmButton{
+    @include toggleButton(-39px,145px);
+}
+
+@keyframes sendButtonAnimation{
+    from{
+        transform:scale(1)
+    }
+    to{
+        transform:scale(1.2)
+    }
+}
+
+@keyframes sentSuccessAnimation{
+    from{
+        transform:scale(1);
+        color: black;
+    }
+    to{
+        transform:scale(1.2);
+        color: green;
+    }
+}
+
+@keyframes sentFailAnimation{
+    from{
+        transform:scale(1);
+        color: black;
+    }
+    to{
+        transform:scale(1.1);
+        color: red;
+    }
+}
+
+@keyframes sendingTextAnimation{
+    from{
+        opacity: 1
+    }
+    to{
+        opacity: 0
+    }
+}
+
+.minis{
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.showMask{
+    animation: showmask .2s 1 linear both; 
+}
+
+.hideMask{
+    animation: hidemask .2s 1 linear both; 
+}
+
+@keyframes showmask{
+    from {
+        height: 100%;
+    }
+    to {
+        height: 0%;
+    }
+}
+
+@keyframes hidemask{
+    from {
+        height: 0%;
+    }
+    to {
+        height: 100%;
+    }
+}
+
+.removeitem{
+    animation: removeitem .2s 1 linear both; 
+}
+
+@keyframes removeitem{
+    from {
+        height: 30px; 
+        left: 0;
+        opacity: 1;
+    }
+    to {
+        height: 0;
+        left: 330px;
+        opacity: 0;
+    }
+}
+
+.addButton{
+    transition-property:background-color;
+    transition-duration:.8s;
+    transition-timing-function: ease;
+    outline: none;
+}
+
+.addButton:hover{
+    background-color: orange;
+    border-color: white;
+    color: white;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 28px;
+    font-family: 'Satisfy', cursive;
+    margin: 10px 0;
+    padding: 10px;
+}
+.headerText{
+    text-shadow: 4px 4px 4px #aaa;
+}
+
+.body{
+    display: flex;
+    justify-content: center;
+    p{
+        display: block;
+    }
+}
+.avatar{
+    position: relative;
+    margin-top: 13vh;
+    width: 200px;
+    height: 200px;
+    background: url("./imgs/avatar.png") no-repeat center center;
+    background-size: 100% 100%;
+    border-radius: 50%;
+    &::after{
+        content: "";
+        position: absolute;
+        top: 10%;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        background: inherit;
+        background-size: 100% 100%;
+        border-radius: 50%;
+        transform: scale(.95);
+        filter: blur(9px) brightness(80%) opacity(.9);
+        z-index: -1;
+    }
+}
+
+.content{
+    display: block;
+    margin-top: 10vh;
+    width: 70%;
+    margin: 5vh auto;
+    p{
+        text-align: center;
+        font-size: 22px;
+        font-weight: bolder;
+        color: black;
+        font-family: 'Open Sans Condensed';
+    }
+}
+
+.articles{
+    display: block;
+    margin-top: 10vh;
+    width: 70%;
+    margin: 5vh auto;
+    li{
+        text-align: center;
+        list-style-type: none;
+        font-weight: bolder;
+        font-size: 23px;
+        font-family: 'Open Sans Condensed';
+        margin: 7vh
+    }
+}
+
+.article_content{
+    margin: 7vh;
+    padding: 0 5vh;
+    h1{
+        font-family: "Open Sans Condensed";
+        font-weight: bolder;
+        font-size: 5vh;
+        color: #6e6565;
+    }
+}
+
+.contentText {
+    font-family: "Open Sans Condensed";
+    font-weight: bold;
+    font-size: 30px;
+    display: block;
+    margin: 15px auto;
+    width: 60%;
+    p{
+        line-height: 2em;
+        font-weight: lighter;
+        font-family: none;
+        font-size: 21px;
+        background-color: #f3f3f2;
+        .paraStart{
+            font-family: 'Satisfy', cursive;
+            font-size: 33px;
+        }
+        .code{
+            font-style: italic;
+            font-size: 18px;
+            background-color: silver;
+            padding: 4px;
+            border-radius: 10px;
+        }
+    }
+}
+
+.ant-steps{
+    width: 20%;
+}
+
+#sinewavecanvas{
+    display: block;
+    margin: 0 auto;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    width: 50%;
+    background: black;
+    border-radius: 20px;
+}
+
+#snakecanvas{
+    @extend #sinewavecanvas
+}
+
+#socketspacecanvascontainer{
+    position: relative;
+    margin-left: 15%;
+    #socketspacecanvas{
+        display: block;
+    }
+    .inputBox{
+        display: none;
+        position: absolute;
+        width: 100%;
+        bottom: 2%;
+        margin-left: 20%;
+    }
+    #textarea{
+        border: 5px solid black;
+        width: 300px;
+    }
+    #sendbtn{
+        border: 5px solid black;
+        width: 120px;
+        color: white;
+        background: black;
+        cursor: pointer;
+    }
+    .choosebtn{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 50px;
+        height: 30px;
+        border-radius: 50%;
+        color: white;
+        cursor: pointer;
+    }
+    #bbtn{
+        background: black;
+        transform: translate(-150%,-50%);
+    }
+    #gbtn{
+        background: pink;
+        transform: translate(50%,-50%);
+    }
+}
+
+@mixin fontBasic($fz:30px,$left:50%,$top:20%,$transX:-50%,$transY:-50%){
+    position: absolute;
+    color: black;
+    font-family: 'Gloria Hallelujah', cursive;;
+    font-size: $fz;
+    left: $left;
+    top: $top;
+    transform:translate($transX,$transY);
+}
+
+@keyframes fadeInLeft{
+    0%{
+        opacity: 0;
+        left: 0%;
+    }
+    70%{
+        opacity: 0;
+        left: 48%;
+    }
+    100%{
+        opacity: 1;
+        left: 50%;
+    }
+}
+
+@keyframes fadeInLeftFixed{
+    0%{
+        opacity: 0;
+        left: 0%;
+    }
+    70%{
+        opacity: 0;
+        left: 28%;
+    }
+    80%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+        left: 50%;
+    }
+}
+
+@keyframes blink{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut{
+    0%{
+        opacity: 1;
+        display: block;
+    }
+    100%{
+        opacity: 0;
+        display: none;
+    }
+}
+
+@keyframes fadeIn{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+#biocontainer{
+    background: white;
+    position: absolute;
+    width: 85%;
+    height: 90%;
+    left: 50%;
+    top: 60%;
+    transform: translate(-50%,-50%);
+    #title{
+        @include fontBasic;
+        // animation: fadeInLeft 1s 1 ease both;
+    }
+    #page1{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        #bioLine1{
+            @include fontBasic(20px,48%,30%,-150%,-50%);
+            animation: fadeInLeft 1s 1 alternate ease both;
+        }
+        #bioLine2{
+            @include fontBasic(20px,48%,40%,-187%,-50%);
+            animation: fadeInLeft 1s .2s 1 alternate ease-out both;
+        }
+        #bioLine3{
+            @include fontBasic(20px,48%,50%,-187%,-50%);
+            animation: fadeInLeft 1s .4s 1 alternate ease-out both;
+        }
+        #bioLine4{
+            @include fontBasic(20px,48%,60%,-214%,-50%);
+            animation: fadeInLeft 1s .6s 1 alternate ease-out both;
+        }
+        #bioLine5{
+            @include fontBasic(20px,48%,70%,-100%,-50%);
+            animation: fadeInLeft 1s .8s 1 alternate ease-out both;
+        }
+        #bioAvatar{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(55%,-52%) scale(.6);
+        }
+    }
+    #page2{
+        position: absolute;
+        display: none;
+        width: 100%;
+        height: 100%;
+        #bio2Line1{
+            @include fontBasic(20px,48%,30%,-282%,-50%);
+            animation: fadeInLeft 1s 1 alternate ease both;
+        }
+        #bio2Line2{
+            @include fontBasic(20px,48%,40%,-37%,-50%);
+            animation: fadeInLeft 1s .2s 1 alternate ease-out both;
+        }
+        #bio2Line3{
+            @include fontBasic(20px,48%,50%,-36%,-50%);
+            animation: fadeInLeft 1s .4s 1 alternate ease-out both;
+        }
+        #bio2Line4{
+            @include fontBasic(20px,48%,60%,-38%,-50%);
+            animation: fadeInLeft 1s .6s 1 alternate ease-out both;
+        }
+        #bio2Line5{
+            @include fontBasic(20px,48%,70%,-36%,-50%);
+            animation: fadeInLeft 1s .8s 1 alternate ease-out both;
+        }
+        #bioAvatar2{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-132%,-52%) scale(.6);
+        }
+    }
+    #page3{
+        position: absolute;
+        display: none;
+        width: 100%;
+        height: 100%;
+        #bio3Line1{
+            @include fontBasic(23px,48%,30%,-150%,-50%);
+            animation: fadeInLeft 1s 1 alternate ease both;
+            text-decoration: underline;
+        }
+        #bio3Line2{
+            @include fontBasic(20px,48%,40%,-82%,-50%);
+            color: #FFC107;
+            animation: fadeInLeft 1s .2s 1 alternate ease-out both;
+        }
+        #bio3Line3{
+            @include fontBasic(20px,48%,50%,-50%,-50%);
+            animation: fadeInLeft 1s .4s 1 alternate ease-out both;
+        }
+        #bio3Line4{
+            @include fontBasic(20px,48%,60%,-44%,-50%);
+            color: #E91E63;
+            animation: fadeInLeft 1s .6s 1 alternate ease-out both;
+        }
+        #bio3Line5{
+            @include fontBasic(20px,48%,70%,-61%,-50%);
+            animation: fadeInLeft 1s .8s 1 alternate ease-out both;
+        }
+    }
+    #page4{
+        position: absolute;
+        display: none;
+        width: 100%;
+        height: 100%;
+        #bio4Line1{
+            @include fontBasic(20px,48%,30%,-258%,-50%);
+            animation: fadeInLeft 1s 1 alternate ease both;
+        }
+        #bio4Line2{
+            @include fontBasic(20px,48%,40%,-468%,-135%);
+            animation: fadeInLeftFixed 1s .2s 1 alternate ease-out both;
+            color: #E91E63;
+        }
+        #bio4Line3{
+            @include fontBasic(18px,48%,50%,-106%,-30%);
+            animation: fadeInLeft 1s .4s 1 alternate ease-out both;
+            a{
+                color: #2196F3;
+            }
+        }
+        #bio4Line4{
+            @include fontBasic(20px,48%,60%,20%,-527%);
+            animation: fadeInLeft 1s .6s 1 alternate ease-out both;
+            color: #E91E63;
+        }
+        #bio4Line5{
+            @include fontBasic(18px,48%,76%,3%,-150%);
+            animation: fadeInLeft 1s .8s 1 alternate ease-out both;
+            border: 1px solid black;
+            border-radius: 9px;
+            padding: 9px;
+        }
+    }
+    #nextPage{
+        @include fontBasic(20px,75%,80%,-50%,-50%);
+        animation: blink 1s 2s infinite alternate ease both;
+        cursor: pointer;
+    }
+}
+
+.fadeOut{
+    animation: fadeOut 1s 0s 1 alternate ease both;
+}
+
+.fadeIn{
+    animation: fadeIn 1s 0s 1 alternate ease both;
+}
+
+.variable{
+    color: #ff9800;
+}
+
+.variableName{
+    color: #ffc107;
+}
+
+.equal{
+    color: red;
+}
+
+.string{
+    color: gray;
+}
+
+#masonryVideo{
+    width: 65%;
+    margin: 0 auto;
+}
+#masonryLink{
+    font-size: 20px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    margin-top: 8px;
+}
+
+.footer{
+    display: block;
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+}

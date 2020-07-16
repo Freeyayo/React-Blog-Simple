@@ -1,26 +1,59 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route} from "react-router-dom";
+// import './App.css';
+import "./App.scss";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+// import Posts from "./components/post";
+// import PostForm from "./components/postForm";
+import Header from "./components/header";
+// import Body from "./components/body";
+import Content from "./components/content";
+import Articles from "./components/articles";
 
-export default App;
+import SineWave from "./components/arts/sinewave";
+import Snake from "./components/arts/snake";
+import SocketSpace from "./components/arts/socketspace";
+import Masonry from "./components/arts/masonry";
+
+import Bio from "./components/bio";
+import Ots from "./components/ots";
+
+import Footer from "./components/footer";
+
+import { Provider } from "react-redux";
+import store from "./store";
+
+const Context = React.createContext('default');
+
+export default class App extends React.Component{
+  constructor(props){
+    super(props);
+  }
+
+  componentWillMount(){
+    if(navigator.userAgent.match(/(iPhone|iPod|Android|ios|iPad)/i)){
+      alert("为了更好浏览体验，请使用PC端浏览")
+    }
+  }
+
+  render(){
+    return(
+      <Provider store = {store}>
+        <Router>
+          <div className="App">
+            <Header/>
+            <Route exact path="/" component={Content} />
+            <Route exact path="/articles" component={Articles} />
+            <Route exact path="/sinewave" component={SineWave} />
+            <Route exact path="/snake" component={Snake} />
+            <Route exact path="/masonry" component={Masonry} />
+            <Route exact path="/socketspace" component={SocketSpace} />
+            <Route exact path="/bio" component={Bio} />
+            <Route exact path="/ots" component={Ots} />
+            <Footer/>   
+          </div>
+        </Router>
+      </Provider>     
+    )
+  }
+};
